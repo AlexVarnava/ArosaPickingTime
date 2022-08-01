@@ -6,21 +6,30 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = load_model('deployment_28042020')
-cols = ['age', 'sex', 'bmi', 'children', 'smoker', 'region']
+model = load_model('Arosa_pick_time_2')
+cols = ['Номенклатура',      
+               'ЯчейкаУчастокСклада',
+               'Ячейка',
+               'Исполнитель',
+               'ЕдиницаИзмерения',
+               'НоменклатураТипНоменклатуры',
+               'КоличествоФакт', 'ВесСтроки']
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template("home.html")
+    #return "<h1>Здесь будет модель предсказаний</h1>"
+    return render_template('home.html')
 
 @app.route('/predict',methods=['POST'])
 def predict():
     int_features = [x for x in request.form.values()]
     final = np.array(int_features)
     data_unseen = pd.DataFrame([final], columns = cols)
-    prediction = predict_model(model, data=data_unseen, round = 0)
+    prediction = predict_model(model, data = data_unseen, round = 0)
     prediction = int(prediction.Label[0])
-    return render_template('home.html',pred='Expected Bill will be {}'.format(prediction))
+    print(prediction)
+    return render_template('home.html', pred='Магическое предсказание: {}'.format(prediction))
+    #return prediction
 
 @app.route('/predict_api',methods=['POST'])
 def predict_api():
