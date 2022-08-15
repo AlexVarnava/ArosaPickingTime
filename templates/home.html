@@ -18,13 +18,18 @@
      <!-- Form to enter new data for predictions  -->
     <form action="{{ url_for('predict')}}"method="POST">
         <input type="text" name="Номенклатура" placeholder="Номенклатура" required = "required" /><br>
+<input type="text" name="ВидНоменклатуры" placeholder="ВидНоменклатуры" required = "required" /><br>
         <input type="text" name="ЯчейкаУчастокСклада" placeholder="ЯчейкаУчастокСклада" required = "required" /><br>
 	<input type="text" name="Ячейка" placeholder="Ячейка" required = "required" /><br>
+<input type="text" name="Ряд" placeholder="Ряд" required = "required" /><br>
+<input type="text" name="Ярус" placeholder="Ярус" required = "required" /><br>
+<input type="number" name="Место" placeholder="Место" required = "required" step="1" /><br>
 	<input type="text" name="Исполнитель" placeholder="Исполнитель" required = "required" /><br>
 	<input type="text" name="ЕдиницаИзмерения" placeholder="ЕдиницаИзмерения" required = "required" /><br>
 	<input type="text" name="НоменклатураТипНоменклатуры" placeholder="НоменклатураТипНоменклатуры" /><br>
-	<input type="number" name="КоличествоФакт" placeholder="КоличествоФакт" required = "required" step="0.2" /><br>
-	<input type="number" name="ВесСтроки" placeholder="ВесСтроки" required = "required" step="0.2" /><br>
+<input type="number" name="НоменклатураВес" placeholder="НоменклатураВес" required = "required" step="0.1" /><br>
+	<input type="number" name="КоличествоФакт" placeholder="КоличествоФакт" required = "required" step="0.1" /><br>
+	<input type="number" name="ВесСтроки" placeholder="ВесСтроки" required = "required" step="0.1" /><br>
 
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
