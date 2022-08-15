@@ -1,24 +1,48 @@
-from flask import Flask,request, url_for, redirect, render_template, jsonify
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[6]:
+
+
+from flask import Flask, request, url_for, redirect, render_template, jsonify
 from pycaret.regression import *
-import pandas as pd
+import pandas as dp
 import pickle
 import numpy as np
 
 app = Flask(__name__)
 
-model = load_model('Arosa_pick_time_2')
-cols = ['Номенклатура',      
-               'ЯчейкаУчастокСклада',
-               'Ячейка',
-               'Исполнитель',
-               'ЕдиницаИзмерения',
-               'НоменклатураТипНоменклатуры',
-               'КоличествоФакт', 'ВесСтроки']
+
+# In[7]:
+
+
+model = load_model('Arosa_pick_time_lightgbm_tune40')
+cols = ['Номенклатура', 
+        'ВидНоменклатуры',
+        'ЯчейкаУчастокСклада',
+        'Ячейка',
+        'Ряд',
+        'Ярус',
+        'Место',
+        'Исполнитель',
+        'ЕдиницаИзмерения',
+        'НоменклатураТипНоменклатуры',
+        'НоменклатураВес',
+        'КоличествоФакт',
+        'ВесСтроки']
+
+
+# In[8]:
+
 
 @app.route("/")
 def home():
     #return "<h1>Здесь будет модель предсказаний</h1>"
     return render_template('home.html')
+
+
+# In[9]:
+
 
 @app.route('/predict',methods=['POST'])
 def predict():
@@ -31,13 +55,15 @@ def predict():
     return render_template('home.html', pred='Магическое предсказание: {}'.format(prediction))
     #return prediction
 
-@app.route('/predict_api',methods=['POST'])
-def predict_api():
-    data = request.get_json(force=True)
-    data_unseen = pd.DataFrame([data])
-    prediction = predict_model(model, data=data_unseen)
-    output = prediction.Label[0]
-    return jsonify(output)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# In[11]:
+
+
+app.run(host='0.0.0.0', port=50000)
+
+
+# In[ ]:
+
+
+
+
