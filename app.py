@@ -59,7 +59,8 @@ def predict():
 # In[11]:
 
 
-app.run(host='0.0.0.0', port=50000)
+#app.run(host='0.0.0.0', port=50555, debug=True)
+app.run(debug=True)
 
 
 # In[ ]:
